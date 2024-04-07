@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css'; // Import CSS file for styling
-
+import './App.css'; 
 const App = () => {
   const [bgColor, setBgColor] = useState('');
   const [transition, setTransition] = useState(false);
@@ -9,7 +8,6 @@ const App = () => {
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
 
-    // Define your color schemes based on the time of day
     if (currentHour >= 6 && currentHour < 12) {
       setBgColor('linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(34,91,195,1) 100%)'); // Morning gradient
     } else if (currentHour >= 12 && currentHour < 18) {
@@ -18,17 +16,16 @@ const App = () => {
       setBgColor('linear-gradient(0deg, rgba(3,5,99,1) 0%, rgba(11,12,15,1) 40%)'); // Night gradient
     }
 
-    // Enable transition after setting the initial color
     setTransition(true);
   }, []);
 
   return (
     <div
-      className={transition ? 'app-container transition' : 'app-container'} // Add or remove transition class
-      style={{ backgroundImage: bgColor }} // Use backgroundImage instead of backgroundColor for gradients
+      className={transition ? 'app-container transition' : 'app-container'} 
+      style={{ backgroundImage: bgColor }} 
     >
       <h1>Hello world</h1>
-      {/* Your website content goes here */}
+
     </div>
   );
 };
