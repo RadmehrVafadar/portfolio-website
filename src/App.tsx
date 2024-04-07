@@ -15,7 +15,7 @@ const App = () => {
     } else if (currentHour >= 12 && currentHour < 18) {
       setBgColor('linear-gradient(0deg, rgba(45,98,253,1) 0%, rgba(254,135,15,1) 100%)'); // Afternoon gradient
     } else {
-      setBgColor('linear-gradient(0deg, rgba(11,12,15,1) 0%, rgba(3,5,99,1) 100%)'); // Night gradient
+      setBgColor('linear-gradient(0deg, rgba(3,5,99,1) 0%, rgba(11,12,15,1) 40%)'); // Night gradient
     }
 
     // Enable transition after setting the initial color
