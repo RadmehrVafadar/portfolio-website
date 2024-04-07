@@ -4,20 +4,20 @@
 }
 
 .app-container {
-  position: fixed; /* Set position to fixed */
-  top: 0; /* Attach to the top of the viewport */
-  right: 0; /* Attach to the right of the viewport */
-  bottom: 0; /* Attach to the bottom of the viewport */
-  left: 0; /* Attach to the left of the viewport */
-  display: flex; /* Use flexbox layout */
-  flex-direction: column; /* Arrange children vertically */
-  justify-content: center; /* Vertically center children */
-  align-items: center; /* Horizontally center children */
-  transition: background-image 1s ease; /* Define transition effect */
+  position: fixed; 
+  top: 0; 
+  right: 0; 
+  bottom: 0; 
+  left: 0; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  transition: background-image 1s ease; 
 }
 
 .app-container.transition {
-  transition: none; /* Remove transition effect when transition state is false */
+  transition: none; 
 }
 
 
