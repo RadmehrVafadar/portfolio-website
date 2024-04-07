@@ -23,7 +23,6 @@ const App = () => {
   }, []);
 
   return (
-
     <div
       className={transition ? 'app-container transition' : 'app-container'} // Add or remove transition class
       style={{ backgroundImage: bgColor }} // Use backgroundImage instead of backgroundColor for gradients
