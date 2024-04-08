@@ -19,6 +19,8 @@ const App = () => {
     setTransition(true);
   }, []);
 
+
+
   return (
     <div
       className={transition ? 'app-container transition' : 'app-container'} 
