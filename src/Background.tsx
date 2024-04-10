@@ -35,7 +35,7 @@ const Background = () => {
         style={{ backgroundImage: bgColor }}
       >
         <div
-        className='movingClouds'
+        className='Clouds'
         />
 
         <div>
