@@ -20,4 +20,26 @@
   transition: none; 
 }
 
+.sun {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(248,251,63,1) 0%, rgba(252,189,70,1) 100%);
+  border-radius: 50%; 
+}
+
+
+
+
+.movingClouds {
+  position: absolute;
+  background-image: url('./assets/clouds.png');
+  background-size: 1000px;
+  width: 100%;
+  height: 450px;
+  bottom: 0px;
+}
+
 
