@@ -20,6 +20,19 @@
   transition: none; 
 }
 
+
+.day {
+  background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(34,91,195,1) 100%);
+}
+
+.night {
+  background: linear-gradient(0deg, rgba(3,5,99,1) 0%, rgba(11,12,15,1) 40%)
+}
+
+
+
+
+
 .sun {
   position: absolute;
   left: 50px;
@@ -28,9 +41,22 @@
   height: 100px;
   background: radial-gradient(circle, rgba(248,251,63,1) 0%, rgba(252,189,70,1) 100%);
   border-radius: 50%; 
+  transition: background-color 0.5s ease-in-out;
 }
 
-.Clouds {
+.moon {
+  position: absolute;
+  right: 100px;
+  top: 50px;
+  width: 100px;
+  height: 100px;
+  background: grey;
+  border-radius: 50%; 
+  transition: background-color 0.5s ease-in-out;
+}
+
+
+.clouds {
   position: absolute;
   background-image: url('./assets/clouds.png');
   animation: animateBG 25s linear infinite;
