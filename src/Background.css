@@ -14,20 +14,29 @@
   justify-content: center; 
   align-items: center; 
   transition: background-image 1s ease; 
+  background: linear-gradient(0deg, var(--myColor1)0%, var(--myColor2) 40%);
+  transition: --myColor1 1s, --myColor2 1s;
 }
 
 .app-container.transition {
   transition: none; 
 }
 
+@property --myColor1 {
+  syntax: '<color>';
+  initial-value: rgba(34,91,195,1);
+  inherits: false;
+}
 
-.day {
-  background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(34,91,195,1) 40%);
+@property --myColor2 {
+  syntax: '<color>';
+  initial-value: rgba(45,188,253,1);
+  inherits: false;
 }
 
 .night {
-  animation: dayToNight 0.3s linear;
-  background: linear-gradient(0deg, rgba(3,5,99,1) 0%, rgba(11,12,15,1) 40%)
+  --myColor1: rgba(3,5,99,1);
+  --myColor2: rgba(11,12,15,1);
 }
 
 .sun {
@@ -37,7 +46,7 @@
   width: 100px;
   height: 100px;
   background: rgb(248,251,63);
-  background: radial-gradient(circle, rgba(248,251,63,1) 0%, rgba(252,189,70,1) 100%);
+  background: radial-gradient(circle, rgba(248,251,63,1) 0%, rgba(252,189,70,1) 70%);
   border-radius: 50%; 
 }
 
@@ -70,68 +79,5 @@
   0%
   {
     background-position-x: 1000px;
-  }
-}
-
-
-@keyframes dayToNight {
-  0%
-  {
-  background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(34,91,195,1) 40%);
-  }
-
-  10%
-  {
-  background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(32,84,179,1) 40%);
-  }
-
-  20%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(30,77,162,1) 40%);
-  }
-
-  30%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(28,69,146,1) 40%);
-  }
-
-  40%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(26,62,130,1) 40%);
-  }
-
-  50%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(24,55,113,1) 40%);
-  }
-
-  60%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(21,48,97,1) 40%);
-  }
-
-  70%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(19,41,80,1) 40%);
-  }
-
-  80%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(17,34,64,1) 40%);
-  }
-
-  90%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(15,26,48,1) 40%);
-  }
-
-  95%
-  {
-    background: linear-gradient(0deg, rgba(45,188,253,1) 0%, rgba(13,19,31,1) 40%);
-  }
-
-  100%
-  {
-  background: linear-gradient(0deg, rgba(3,5,99,1) 0%, rgba(11,12,15,1) 40%)
   }
 }

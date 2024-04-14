@@ -12,7 +12,7 @@ const Background = () => {
   return (
     <div>
       <div
-        className={"app-container " + (isDay ? "day" : "night")}
+        className={"app-container " + (isDay ? "" : "night")}
       >
         <div className="clouds" />
         <div>
