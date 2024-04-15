@@ -18,8 +18,6 @@
   transition: --myColor1 1s, --myColor2 1s;
 }
 
-
-
 @property --myColor1 {
   syntax: '<color>';
   initial-value: rgba(34,91,195,1);
@@ -37,7 +35,7 @@
   --myColor2: rgba(11,12,15,1);
 }
 
-.sun {
+.sphear {
   position: absolute;
   left: 50px;
   top: 50px;
@@ -45,21 +43,25 @@
   height: 100px;
   background-color: rgb(252,189,70,1);
   border-radius: 50%; 
-
+  transition:
+  background-color 0.5s ease-in-out, 
+  left 0.5s ease-in-out;
 }
 
 .moon {
-  position: absolute;
-  right: 100px;
-  top: 50px;
-  width: 100px;
-  height: 100px;
   background-color: rgb(78, 78, 77);
-  border-radius: 50%; 
-  transition: background-color 1s ease-in-out;
-  animation: moveSun 0.5s ease-in-out forwards
-  
+  left: calc(100% - 150px)
+
 }
+
+.sun {
+  background-color: rgb(252,189,70,1);
+  left: 50px;
+}
+
+
+
+
 
 .clouds {
   position: absolute;
@@ -67,7 +69,7 @@
   animation: animateBG 25s linear infinite;
   background-size: 1000px;
   width: 100%;
-  height: 450px;
+  height: 40%;
   bottom: 0px;
 }
 
