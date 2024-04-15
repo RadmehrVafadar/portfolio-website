@@ -8,9 +8,9 @@ const Menu = () => {
     return (
         <>
         <div className="container">
-            <p className='hello'>About Me</p>
-            <p>My Projects</p>
-            <p>Resume</p>
+            <h1 className='button'>About Me</h1>
+            <h1 className='button'>My Projects</h1>
+            <h1 className='button'>Resume</h1>
         </div>
         </>
     );
