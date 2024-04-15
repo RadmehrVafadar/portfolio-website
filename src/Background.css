@@ -18,9 +18,7 @@
   transition: --myColor1 1s, --myColor2 1s;
 }
 
-.app-container.transition {
-  transition: none; 
-}
+
 
 @property --myColor1 {
   syntax: '<color>';
@@ -47,7 +45,6 @@
   height: 100px;
   background-color: rgb(252,189,70,1);
   border-radius: 50%; 
-  transition: background-color 1s ease-in-out;
 
 }
 
@@ -60,6 +57,8 @@
   background-color: rgb(78, 78, 77);
   border-radius: 50%; 
   transition: background-color 1s ease-in-out;
+  animation: moveSun 0.5s ease-in-out forwards
+  
 }
 
 .clouds {
@@ -83,3 +82,14 @@
     background-position-x: 1000px;
   }
 }
+
+@keyframes moveSun {
+  0% {
+    left: 50px; 
+  }
+  100% {
+    left: calc(100% - 150px); 
+  }
+}
+
+
