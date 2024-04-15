@@ -1,6 +1,7 @@
 *{
   margin: 0;
   padding: 0;
+  z-index: -1;
 }
 
 .app-container {
@@ -9,10 +10,6 @@
   right: 0; 
   bottom: 0; 
   left: 0; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
   transition: background-image 1s ease; 
   background: linear-gradient(0deg, var(--myColor1)0%, var(--myColor2) 40%);
   transition: --myColor1 1s, --myColor2 1s;
