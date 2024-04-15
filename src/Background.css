@@ -45,9 +45,10 @@
   top: 50px;
   width: 100px;
   height: 100px;
-  background: rgb(248,251,63);
-  background: radial-gradient(circle, rgba(248,251,63,1) 0%, rgba(252,189,70,1) 70%);
+  background-color: rgb(252,189,70,1);
   border-radius: 50%; 
+  transition: background-color 1s ease-in-out;
+
 }
 
 .moon {
@@ -56,9 +57,9 @@
   top: 50px;
   width: 100px;
   height: 100px;
-  background: radial-gradient(circle, rgba(248,251,63,1) 0%, rgba(252,189,70,1) 100%);
+  background-color: rgb(78, 78, 77);
   border-radius: 50%; 
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 1s ease-in-out;
 }
 
 .clouds {
@@ -70,6 +71,7 @@
   height: 450px;
   bottom: 0px;
 }
+
 
 
 
