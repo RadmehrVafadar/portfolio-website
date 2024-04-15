@@ -11,18 +11,13 @@ const Background = () => {
 
   return (
     <div>
-      <div
-        className={"app-container " + (isDay ? "" : "night")}
-      >
+      <div className={"app-container " + (isDay ? "" : "night")}>
         <div className="clouds" />
-        <div>
-          <div
-            className={"sphear " + (isDay ? "sun" : "moon")}
-            onClick={() => toggleDayNight()}
-          />
-        </div>
-      </div>
+        <div className={"sphear " + (isDay ? "sun" : "moon")} onClick={() => toggleDayNight()} />
     </div>
+    </div>
+          
+          
   );
 };
 
