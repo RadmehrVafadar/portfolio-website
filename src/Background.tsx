@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Background.css';
 
 const Background = () => {
@@ -16,8 +16,7 @@ const Background = () => {
         <div className={"sphear " + (isDay ? "sun" : "moon")} onClick={() => toggleDayNight()} />
     </div>
     </div>
-          
-          
+  
   );
 };
 
