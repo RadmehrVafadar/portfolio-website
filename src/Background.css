@@ -85,13 +85,5 @@
   }
 }
 
-@keyframes moveSun {
-  0% {
-    left: 50px; 
-  }
-  100% {
-    left: calc(100% - 150px); 
-  }
-}
 
 
