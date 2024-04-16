@@ -20,5 +20,12 @@
 }
 
 .button {
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
+    padding: 10px;
+    background-color: white;
+    border-radius: 9px;
+}
+
+.button:hover {
+  color: blueviolet;
 }
