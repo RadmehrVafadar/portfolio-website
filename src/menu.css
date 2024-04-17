@@ -28,7 +28,7 @@
 }
 
 .button:hover {
-  color: brown;
+  color: rgb(83, 35, 35);
   transform: scale(1.5); 
 }
 
