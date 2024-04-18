@@ -3,7 +3,6 @@
   padding: 0;
 }
 
-
 .container {
     position: fixed;
     margin: auto; 
@@ -33,7 +32,6 @@
   color: rgb(83, 35, 35);
   transform: scale(1.2); 
 }
-
 
 .underline {
   text-decoration: underline;
