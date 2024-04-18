@@ -29,7 +29,6 @@
 }
 
 .button:hover {
-  color: rgb(83, 35, 35);
   transform: scale(1.2); 
 }
 
