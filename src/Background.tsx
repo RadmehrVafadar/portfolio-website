@@ -3,7 +3,17 @@ import { useState } from 'react';
 import './Background.css';
 
 const Background = () => {
-  const [isDay, setIsDay] = useState(true);
+
+  function decideTime() {
+  const time = new Date().getHours()
+    if (time < 18) { 
+      return true
+    } 
+    return false
+  };
+
+
+  const [isDay, setIsDay] = useState(decideTime);
 
   const toggleDayNight = () => {
     setIsDay(!isDay);

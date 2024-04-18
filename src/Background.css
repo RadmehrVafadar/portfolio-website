@@ -23,7 +23,7 @@
 
 @property --myColor2 {
   syntax: '<color>';
-  initial-value: rgba(45,188,253,1);
+  initial-value: rgb(32, 133, 180);
   inherits: false;
 }
 
