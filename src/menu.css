@@ -32,10 +32,6 @@
   transform: scale(1.2); 
 }
 
-.underline {
-  text-decoration: underline;
-}
-
 @media (max-width: 960px) {
   .container {
     flex-direction: column;
