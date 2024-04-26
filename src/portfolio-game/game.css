@@ -1,0 +1,56 @@
+:root {
+    --pixel-size: 2px;
+    --grid-cell: calc( var(--pixel-size) * 16);
+}
+
+@media( min-width: 700px) {
+    :root {
+        --pixel-size: 3px;
+    }
+}
+@media( min-width: 900px) {
+    :root {
+        --pixel-size: 4px;
+    }
+}
+
+html, body { }
+
+
+.pixel-art {
+    image-rendering: pixelated;
+}
+
+.camera {
+    width: calc(var(--pixel-size) * 160);
+    height: calc(var(--pixel-size) * 144);
+    overflow: hidden;
+    background: #61ddf7;
+    position: relative;
+}
+
+.map {
+    image-rendering: pixelated;
+    background-image: url('https://assets.codepen.io/CameraDemoMap.png');
+    background-size: 100%;
+    width: calc(13 * var(--grid-cell));
+    height: calc(10 * var(--grid-cell));
+    position: relative;
+}
+
+
+.character {
+    width: calc(var(--grid-cell) * 2);
+    height: calc(var(--grid-cell) * 2);
+    position: absolute;
+    overflow: hidden;
+}
+
+.shadow {
+    width: calc(var(--grid-cell)* 2);
+    height: calc(var(--grid-cell)* 2);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url('https://assets.codepen.io/21542/DemoRpgCharacterSHadow.png') no-repeat no-repeat;
+}
