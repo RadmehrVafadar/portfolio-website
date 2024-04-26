@@ -68,6 +68,11 @@ const keys = {
 }
 document.addEventListener("keydown", (e) => {
    var dir = keys[e.which];
+
+   if (e.key == 'e') {
+    window.location.href = '/index.html'
+   }
+
    if (dir && held_directions.indexOf(dir) === -1) {
       held_directions.unshift(dir)
    }
