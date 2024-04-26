@@ -9,7 +9,7 @@ const Menu = () => {
     return (
         <>
         <div className="container">
-            <div className='button' >Start</div>
+           <a href="https://www.google.com" rel="noopener noreferrer" className='button'>Start</a> 
             <div className='button'>Blog</div>
            <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" className='button'>Resume</a> 
 
