@@ -3,9 +3,14 @@ var map = document.querySelector(".map");
 
 //start in the middle of the map
 var x = 90;
-var y = 34;
+var y = 94;
 var held_directions = []; //State of which arrow keys we are holding down
 var speed = 2; //How fast the character moves in pixels per frame
+
+var interact = false
+
+
+
 
 const placeCharacter = () => {
    
@@ -23,6 +28,9 @@ const placeCharacter = () => {
    }
    character.setAttribute("walking", held_direction ? "true" : "false");
    
+
+
+
    //Limits (gives the illusion of walls)
    var leftLimit = -7;
    var rightLimit = (16 * 11)+7;
@@ -32,7 +40,12 @@ const placeCharacter = () => {
    if (x > rightLimit) { x = rightLimit; }
    if (y < topLimit) { y = topLimit; }
    if (y > bottomLimit) { y = bottomLimit; }
-   
+
+
+   //Standing points (gives placement to text pop ups)
+   if (interact) {
+      if (x > 80 && x < 100 && y > 100 && y < 120) {console.log('i am in location')}
+   }
    
    var camera_left = pixelSize * 66;
    var camera_top = pixelSize * 42;
@@ -76,6 +89,10 @@ document.addEventListener("keydown", (e) => {
    if (dir && held_directions.indexOf(dir) === -1) {
       held_directions.unshift(dir)
    }
+
+   if (e.key == ' ') {
+      interact = true
+   }
 })
 
 document.addEventListener("keyup", (e) => {
@@ -83,6 +100,10 @@ document.addEventListener("keyup", (e) => {
    var index = held_directions.indexOf(dir);
    if (index > -1) {
       held_directions.splice(index, 1)
+   }
+
+   if (e.key == ' ') {
+      interact = false
    }
 });
 

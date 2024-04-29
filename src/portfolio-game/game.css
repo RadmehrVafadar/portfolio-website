@@ -182,7 +182,7 @@ body {
 
 .headline {
    position:absolute;
-   top:calc(var(--pixel-size) * -10);
-   right:calc(var(--pixel-size)* -15);
-   width: calc(var(--pixel-size) * 105)
+   top:calc(var(--pixel-size) * -15);
+   right:calc(var(--pixel-size)* -20);
+   width: calc(var(--pixel-size) * 130)
 }
