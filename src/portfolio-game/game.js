@@ -117,11 +117,9 @@ const removePressedAll = () => {
    })
 }
 document.body.addEventListener("mousedown", () => {
-   console.log('mouse is down')
    isPressed = true;
 })
 document.body.addEventListener("mouseup", () => {
-   console.log('mouse is up')
    isPressed = false;
    held_directions = [];
    removePressedAll();
