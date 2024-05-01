@@ -44,7 +44,9 @@ const placeCharacter = () => {
 
    //Standing points (gives placement to text pop ups)
    if (interact) {
-      if (x > 80 && x < 100 && y > 100 && y < 120) {console.log('i am in location')}
+      if (x > 80 && x < 100 && y > 100 && y < 120) {
+         console.log('I am in location')
+      }
    }
    
    var camera_left = pixelSize * 66;
@@ -154,4 +156,4 @@ document.querySelector(".dpad-up").addEventListener("mouseover", (e) => handleDp
 document.querySelector(".dpad-right").addEventListener("mouseover", (e) => handleDpadPress(directions.right));
 document.querySelector(".dpad-down").addEventListener("mouseover", (e) => handleDpadPress(directions.down));
 
-document.querySelector('.exit_button').addEventListener('mouseup', () => { window.location.href = '/index.html'})
+document.getElementById('exit_button').addEventListener('mouseup', () => { window.location.href = '/index.html'})
