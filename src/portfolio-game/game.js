@@ -45,7 +45,7 @@ const placeCharacter = () => {
    //Standing points (gives placement to text pop ups)
    if (interact) {
       if (x > 80 && x < 100 && y > 100 && y < 120) {
-         console.log('I am in location')
+         document.querySelector('.dialogueBox').style.display = 'block';
       }
    }
    
