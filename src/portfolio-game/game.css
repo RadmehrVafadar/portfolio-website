@@ -151,7 +151,9 @@ body {
    user-select:none;
 }
 
-
+.exit_button{
+   position: inherit;
+}
 .corner_topleft,
 .corner_topright,
 .corner_bottomleft,

@@ -135,6 +135,9 @@ const handleDpadPress = (direction, click) => {
       document.querySelector(".dpad-"+direction).classList.add("pressed");
    }
 }
+
+
+
 //Bind a ton of events for the dpad
 document.querySelector(".dpad-left").addEventListener("touchstart", (e) => handleDpadPress(directions.left, true));
 document.querySelector(".dpad-up").addEventListener("touchstart", (e) => handleDpadPress(directions.up, true));
@@ -150,3 +153,5 @@ document.querySelector(".dpad-left").addEventListener("mouseover", (e) => handle
 document.querySelector(".dpad-up").addEventListener("mouseover", (e) => handleDpadPress(directions.up));
 document.querySelector(".dpad-right").addEventListener("mouseover", (e) => handleDpadPress(directions.right));
 document.querySelector(".dpad-down").addEventListener("mouseover", (e) => handleDpadPress(directions.down));
+
+document.querySelector('.exit_button').addEventListener('mouseup', () => { window.location.href = '/index.html'})
