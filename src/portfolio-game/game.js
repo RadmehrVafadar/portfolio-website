@@ -43,10 +43,13 @@ const placeCharacter = () => {
 
 
    //Standing points (gives placement to text pop ups)
-   if (interact) {
-      if (x > 80 && x < 100 && y > 100 && y < 120) {
+   if (x > 80 && x < 100 && y > 100 && y < 120) {
+      if (interact) {
          document.querySelector('.dialogueBox').style.display = 'block';
       }
+   }
+   else {
+      document.querySelector('.dialogueBox').style.display = 'none';
    }
    
    var camera_left = pixelSize * 66;
