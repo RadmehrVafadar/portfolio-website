@@ -19,6 +19,12 @@
    }
 } */
 
+* {
+   font-family: 'Press Start 2P', cursive;
+   box-sizing: border-box;
+}
+
+
 body {
    background: var(--bg);
    display: flex;
@@ -184,4 +190,15 @@ body {
    top:calc(var(--pixel-size) * -15);
    right:calc(var(--pixel-size)* -20);
    width: calc(var(--pixel-size) * 130)
+}
+
+.dialogueBox {
+   position:absolute;
+   left: calc(var(--pixel-size));
+   bottom: calc(var(--pixel-size));
+   width: calc(var(--pixel-size) * 168);
+   height: calc(var(--pixel-size) * 50);
+   background-color: white;
+
+   padding: 1em;
 }
