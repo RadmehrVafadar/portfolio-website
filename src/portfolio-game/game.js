@@ -48,9 +48,7 @@ const placeCharacter = () => {
          document.querySelector('.dialogueBox').style.display = 'block';
       }
    }
-   else {
-      document.querySelector('.dialogueBox').style.display = 'none';
-   }
+   else document.querySelector('.dialogueBox').style.display = 'none';
    
    var camera_left = pixelSize * 66;
    var camera_top = pixelSize * 42;
