@@ -57,7 +57,7 @@ const placeCharacter = () => {
       if (interact && !previousInteract) {
             var dialogueBox = document.querySelector('.dialogueBox');
             dialogueBox.textContent = "";
-            var text = document.createTextNode("ima sell it you salary at the cabiidge");
+            var text = document.createTextNode("this is going to be an explanation of a statue");
             dialogueBox.appendChild(text);
             dialogueBox.style.display = 'block';
       }
