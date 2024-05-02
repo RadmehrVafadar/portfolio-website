@@ -1,5 +1,8 @@
 var character = document.querySelector(".character");
 var map = document.querySelector(".map");
+var previousInteract = false;
+var interact = false
+
 
 //start in the middle of the map
 var x = 90;
@@ -7,7 +10,6 @@ var y = 94;
 var held_directions = []; //State of which arrow keys we are holding down
 var speed = 2; //How fast the character moves in pixels per frame
 
-var interact = false
 
 
 
@@ -42,19 +44,27 @@ const placeCharacter = () => {
 
 
    //Standing points (gives placement to text pop ups)
-   const dialogueBox = document.querySelector('.dialogueBox')
 
    if (x > 80 && x < 100 && y > 100 && y < 120) {
-      if (interact) {
-         dialogueBox.style.display = 'block';
+      if (interact && !previousInteract) {
+            var dialogueBox = document.querySelector('.dialogueBox');
+            dialogueBox.textContent = "";
+            var text = document.createTextNode("Hello and welcome to my game...");
+            dialogueBox.appendChild(text);
+            dialogueBox.style.display = 'block';
       }
    } else if (x > 28 && x < 46 && y > 278 && y < 300) {
-      if (interact) {
-         dialogueBox.style.display = 'block';
+      if (interact && !previousInteract) {
+            var dialogueBox = document.querySelector('.dialogueBox');
+            dialogueBox.textContent = "";
+            var text = document.createTextNode("ima sell it you salary at the cabiidge");
+            dialogueBox.appendChild(text);
+            dialogueBox.style.display = 'block';
       }
    } else {
-      dialogueBox.style.display = 'none';
+        document.querySelector('.dialogueBox').style.display = 'none';
    }
+      previousInteract = interact;
 
       
       var camera_left = pixelSize * 66;
@@ -62,7 +72,7 @@ const placeCharacter = () => {
       
       map.style.transform = `translate3d( ${-x*pixelSize+camera_left}px, ${-y*pixelSize+camera_top}px, 0 )`;
       character.style.transform = `translate3d( ${x*pixelSize}px, ${y*pixelSize}px, 0 )`;  
-}
+};
 
 
 //Set up the game loop
