@@ -30,7 +30,6 @@ const placeCharacter = () => {
    
 
 
-
    //Limits (gives the illusion of walls)
    var leftLimit = -7;
    var rightLimit = (16 * 11)+7;
@@ -43,12 +42,19 @@ const placeCharacter = () => {
 
 
    //Standing points (gives placement to text pop ups)
-   if (x > 80 && x < 100 && y > 100 && y < 120) {
-      if (interact) {
-         document.querySelector('.dialogueBox').style.display = 'block';
-      }
-   }
-   else document.querySelector('.dialogueBox').style.display = 'none';
+
+if (x > 80 && x < 100 && y > 100 && y < 120) {
+    if (interact) {
+        document.querySelector('.dialogueBox').style.display = 'block';
+    }
+} else if (x > 28 && x < 46 && y > 278 && y < 300) {
+    if (interact) {
+        document.querySelector('.dialogueBox').style.display = 'block';
+    }
+} else {
+    document.querySelector('.dialogueBox').style.display = 'none';
+}
+
    
    var camera_left = pixelSize * 66;
    var camera_top = pixelSize * 42;
