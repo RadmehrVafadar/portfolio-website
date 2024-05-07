@@ -49,7 +49,7 @@ body {
    width: calc(var(--pixel-size) * 170);
    height: calc(var(--pixel-size) * 250);
    overflow: hidden;
-   background: #61ddf7;
+   background: #83e5f8;
    position:relative;
 }
 
