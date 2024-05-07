@@ -29,7 +29,6 @@ const placeCharacter = () => {
       character.setAttribute("facing", held_direction);
    }
    character.setAttribute("walking", held_direction ? "true" : "false");
-   
 
 
    //Limits (gives the illusion of walls)
@@ -110,9 +109,7 @@ document.addEventListener("keydown", (e) => {
       held_directions.unshift(dir)
    }
 
-   if (e.key == ' ') {
-      interact = true
-   }
+   if (e.key == ' ') { interact = true }
 })
 
 document.addEventListener("keyup", (e) => {
@@ -122,9 +119,7 @@ document.addEventListener("keyup", (e) => {
       held_directions.splice(index, 1)
    }
 
-   if (e.key == ' ') {
-      interact = false
-   }
+   if (e.key == ' ') { interact = false }
 });
 
 
@@ -152,7 +147,7 @@ const handleDpadPress = (direction, click) => {
    
    if (isPressed) {
       removePressedAll();
-      document.querySelector(".dpad-"+direction).classList.add("pressed");
+      document.querySelector(".dpad-"+ direction).classList.add("pressed");
    }
 }
 
