@@ -8,7 +8,7 @@ var interact = false
 var x = 90;
 var y = 94;
 var held_directions = []; //State of which arrow keys we are holding down
-var speed = 1; //How fast the character moves in pixels per frame
+var speed = 3; //How fast the character moves in pixels per frame
 
 
 
@@ -42,7 +42,12 @@ const placeCharacter = () => {
    if (y > bottomLimit) { y = bottomLimit; }
 
 
+
    //Standing points (gives placement to text pop ups)
+
+   if (interact) {
+      console.log([x,y])
+   }
 
    if (x > 80 && x < 100 && y > 100 && y < 120) {
       if (interact && !previousInteract) {
