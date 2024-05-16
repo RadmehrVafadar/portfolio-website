@@ -194,7 +194,7 @@ body {
 
 .dialogueBox {
    position:absolute;
-   /* overflow-y: scroll; */
+   overflow-y: scroll;
    left: calc(var(--pixel-size));
    bottom: calc(var(--pixel-size));
    width: calc(var(--pixel-size) * 148);
