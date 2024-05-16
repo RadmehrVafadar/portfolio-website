@@ -48,7 +48,7 @@ const placeCharacter = () => {
    if (interact) {
       console.log([x,y])
    }
-
+   //Interaction points change when pixel ratio size changes **needs updating
    if (x > 80 && x < 100 && y > 100 && y < 120) {
       if (interact && !previousInteract) {
             var dialogueBox = document.querySelector('.dialogueBox');
