@@ -194,15 +194,15 @@ body {
 
 .dialogueBox {
    position:absolute;
-   overflow-y: scroll;
+   /* overflow-y: scroll; */
    left: calc(var(--pixel-size));
    bottom: calc(var(--pixel-size));
-   width: calc(var(--pixel-size) * 168);
+   width: calc(var(--pixel-size) * 148);
    height: calc(var(--pixel-size) * 50);
 
    background-color: whitesmoke;
    border: black solid 4px;
-   border-radius: 1em;
+   border-radius: 2em;
 
 
    padding: 1em;
