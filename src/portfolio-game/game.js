@@ -8,7 +8,7 @@ var interact = false
 var x = 90;
 var y = 94;
 var held_directions = []; //State of which arrow keys we are holding down
-var speed = 1; //How fast the character moves in pixels per frame
+var speed = 2; //How fast the character moves in pixels per frame
 
 
 
