@@ -81,10 +81,10 @@ body {
 
 .character_spritesheet {
    position: absolute;
-   background: url("/src/assets/character\ sprite.png") no-repeat no-repeat;
+   background: url("https://assets.codepen.io/21542/DemoRpgCharacter.png") no-repeat no-repeat;
    background-size: 100%;
-   width: calc( var(--grid-cell)* 20 );
-   height: calc( var(--grid-cell)* 15 );
+   width: calc( var(--grid-cell)* 8 );
+   height: calc( var(--grid-cell)* 8 );
 }
 
 .character[facing="right"] .character_spritesheet {
@@ -97,7 +97,7 @@ body {
    background-position-y: calc( var(--pixel-size) * -96 );
 }
 .character[walking="true"] .character_spritesheet {
-   animation: walkAnimation 0.5s steps(4) infinite; 
+   animation: walkAnimation 0.6s steps(4) infinite; 
 }
 
 @keyframes walkAnimation {
