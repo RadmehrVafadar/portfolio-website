@@ -19,6 +19,11 @@ var speed = 2; //How fast the character moves in pixels per frame
 // Store initial pixel size to maintain coordinate consistency
 var initialPixelSize = getCurrentPixelSize();
 
+// Track if player has moved from spawn position
+var hasPlayerMoved = false;
+var initialX = x;
+var initialY = y;
+
 
 
 
@@ -34,6 +39,11 @@ const placeCharacter = () => {
       if (held_direction === directions.up) {y += speed;}
       if (held_direction === directions.down) {y -= speed;}
       character.setAttribute("facing", held_direction);
+      
+      // Check if player has moved from initial position
+      if (!hasPlayerMoved && (x !== initialX || y !== initialY)) {
+         hasPlayerMoved = true;
+      }
    }
    character.setAttribute("walking", held_direction ? "true" : "false");
 
@@ -57,37 +67,33 @@ const placeCharacter = () => {
       console.log([x,y])
    }
    
-   // Interaction points now scale with the grid system (16px per grid cell)
-   // Welcome message interaction area (approximately 5-6 grid cells from start, 6-7.5 cells down)
-   var welcomeAreaLeft = 80;
-   var welcomeAreaRight = 100;
-   var welcomeAreaTop = 100;
-   var welcomeAreaBottom = 120;
+   var dialogueBox = document.querySelector('.dialogueBox');
    
-   // Statue interaction area (approximately 1.75-2.875 grid cells from left, 17.375-18.75 cells down)  
-   var statueAreaLeft = 28;
-   var statueAreaRight = 46;
-   var statueAreaTop = 258;
-   var statueAreaBottom = 300;
-   
-   if (x > welcomeAreaLeft && x < welcomeAreaRight && y > welcomeAreaTop && y < welcomeAreaBottom) {
-      if (interact && !previousInteract) {
-            var dialogueBox = document.querySelector('.dialogueBox');
-            dialogueBox.textContent = "";
-            var text = document.createTextNode("Hello and welcome to my game...");
-            dialogueBox.appendChild(text);
-            dialogueBox.style.display = 'block';
-      }
-   } else if (x > statueAreaLeft && x < statueAreaRight && y > statueAreaTop && y < statueAreaBottom) {
-      if (interact && !previousInteract) {
-            var dialogueBox = document.querySelector('.dialogueBox');
-            dialogueBox.textContent = "";
-            var text = document.createTextNode("this is going to be an explanation of a statue");
-            dialogueBox.appendChild(text);
-            dialogueBox.style.display = 'block';
-      }
+   // Show welcome message automatically at spawn, hide when player moves
+   if (!hasPlayerMoved) {
+      dialogueBox.textContent = "";
+      var text = document.createTextNode("Welcome to my portfolio showcase game! Navigate with the arrow keys. Press Spacebar to interact with statues. To exit, go to the door and press Space.");
+      dialogueBox.appendChild(text);
+      dialogueBox.style.display = 'block';
    } else {
-        document.querySelector('.dialogueBox').style.display = 'none';
+      // Handle other interactions after player has moved
+      
+      // Statue interaction area (approximately 1.75-2.875 grid cells from left, 17.375-18.75 cells down)  
+      var statueAreaLeft = 28;
+      var statueAreaRight = 46;
+      var statueAreaTop = 258;
+      var statueAreaBottom = 300;
+      
+      if (x > statueAreaLeft && x < statueAreaRight && y > statueAreaTop && y < statueAreaBottom) {
+         if (interact && !previousInteract) {
+               dialogueBox.textContent = "";
+               var text = document.createTextNode("this is going to be an explanation of a statue");
+               dialogueBox.appendChild(text);
+               dialogueBox.style.display = 'block';
+         }
+      } else {
+           dialogueBox.style.display = 'none';
+      }
    }
       previousInteract = interact;
 
@@ -128,7 +134,7 @@ document.addEventListener("keydown", (e) => {
    var dir = keys[e.which];
 
    // Exit area interaction (top of the map)
-   if (e.key == 'e' && x > 70 && x < 130 && y > 80) {
+   if (e.key == ' ' && x > 70 && x < 130 && y > 80) {
     window.location.href = '/index.html'
    }
 
