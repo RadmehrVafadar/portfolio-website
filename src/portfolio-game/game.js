@@ -39,10 +39,10 @@ const placeCharacter = () => {
 
 
    //Limits (gives the illusion of walls) - now scale with pixel size
-   var leftLimit = -7;
-   var rightLimit = (16 * 11) + 7;
-   var topLimit = 80;
-   var bottomLimit = (16 * 31.5);
+   var leftLimit = 0;
+   var rightLimit = (16 * 12) + 12;
+   var topLimit = 90;
+   var bottomLimit = (16 * 36.7);
    if (x < leftLimit) { x = leftLimit; }
    if (x > rightLimit) { x = rightLimit; }
    if (y < topLimit) { y = topLimit; }
@@ -67,7 +67,7 @@ const placeCharacter = () => {
    // Statue interaction area (approximately 1.75-2.875 grid cells from left, 17.375-18.75 cells down)  
    var statueAreaLeft = 28;
    var statueAreaRight = 46;
-   var statueAreaTop = 278;
+   var statueAreaTop = 258;
    var statueAreaBottom = 300;
    
    if (x > welcomeAreaLeft && x < welcomeAreaRight && y > welcomeAreaTop && y < welcomeAreaBottom) {
@@ -128,7 +128,7 @@ document.addEventListener("keydown", (e) => {
    var dir = keys[e.which];
 
    // Exit area interaction (top of the map)
-   if (e.key == 'e' && x > 70 && x < 130 && y == 80) {
+   if (e.key == 'e' && x > 70 && x < 130 && y > 80) {
     window.location.href = '/index.html'
    }
 
