@@ -28,18 +28,82 @@ var initialY = y;
 
 
 
+// Statue system configuration
+// Each statue defines a collision rectangle (player cannot enter)
+// and an optional interaction padding to allow interacting slightly around it.
+var STATUE_DEFAULT_INTERACT_PADDING = 10;
+
+var statues = [
+   // Example statue. Duplicate and edit for more statues.
+   { id: "Mirror", rect: { x1: 0, y1: 110, x2: 30, y2: 160 }, text: "this is going to be an explanation of a statue", interactPadding: 10 },
+];
+
+function pointInRect(px, py, rect) {
+   return px >= rect.x1 && px <= rect.x2 && py >= rect.y1 && py <= rect.y2;
+}
+
+function inflateRect(rect, padding) {
+   return {
+      x1: rect.x1 - padding,
+      y1: rect.y1 - padding,
+      x2: rect.x2 + padding,
+      y2: rect.y2 + padding,
+   };
+}
+
+function isCollidingWithAnyStatue(nextX, nextY) {
+   for (var i = 0; i < statues.length; i++) {
+      var s = statues[i];
+      if (pointInRect(nextX, nextY, s.rect)) {
+         return true;
+      }
+   }
+   return false;
+}
+
+function getNearbyStatue(px, py) {
+   for (var i = 0; i < statues.length; i++) {
+      var s = statues[i];
+      var padding = (typeof s.interactPadding === 'number') ? s.interactPadding : STATUE_DEFAULT_INTERACT_PADDING;
+      var interactRect = inflateRect(s.rect, padding);
+      if (pointInRect(px, py, interactRect)) {
+         return s;
+      }
+   }
+   return null;
+}
+
 const placeCharacter = () => {
    
    var pixelSize = getCurrentPixelSize();
    
    const held_direction = held_directions[0];
    if (held_direction) {
-      if (held_direction === directions.left) {x += speed;}
-      if (held_direction === directions.right) {x -= speed;}
-      if (held_direction === directions.up) {y += speed;}
-      if (held_direction === directions.down) {y -= speed;}
+      var dx = 0;
+      var dy = 0;
+      if (held_direction === directions.left) { dx += speed; }
+      if (held_direction === directions.right) { dx -= speed; }
+      if (held_direction === directions.up) { dy += speed; }
+      if (held_direction === directions.down) { dy -= speed; }
+
+      // Attempt horizontal move if not colliding with any statue
+      if (dx !== 0) {
+         var nextX = x + dx;
+         if (!isCollidingWithAnyStatue(nextX, y)) {
+            x = nextX;
+         }
+      }
+
+      // Attempt vertical move if not colliding with any statue
+      if (dy !== 0) {
+         var nextY = y + dy;
+         if (!isCollidingWithAnyStatue(x, nextY)) {
+            y = nextY;
+         }
+      }
+
       character.setAttribute("facing", held_direction);
-      
+
       // Check if player has moved from initial position
       if (!hasPlayerMoved && (x !== initialX || y !== initialY)) {
          hasPlayerMoved = true;
@@ -71,28 +135,16 @@ const placeCharacter = () => {
    
    // Show welcome message automatically at spawn, hide when player moves
    if (!hasPlayerMoved) {
-      dialogueBox.textContent = "";
-      var text = document.createTextNode("Welcome to my portfolio showcase game! Navigate with the arrow keys. Press Spacebar to interact with statues. To exit, go to the door and press Space.");
-      dialogueBox.appendChild(text);
+      dialogueBox.innerHTML = "Welcome to my portfolio showcase game! Navigate with the arrow keys. Press Spacebar to interact with statues. To exit, go to the door and press Space.";
       dialogueBox.style.display = 'block';
    } else {
       // Handle other interactions after player has moved
-      
-      // Statue interaction area (approximately 1.75-2.875 grid cells from left, 17.375-18.75 cells down)  
-      var statueAreaLeft = 28;
-      var statueAreaRight = 46;
-      var statueAreaTop = 258;
-      var statueAreaBottom = 300;
-      
-      if (x > statueAreaLeft && x < statueAreaRight && y > statueAreaTop && y < statueAreaBottom) {
-         if (interact && !previousInteract) {
-               dialogueBox.textContent = "";
-               var text = document.createTextNode("this is going to be an explanation of a statue");
-               dialogueBox.appendChild(text);
-               dialogueBox.style.display = 'block';
-         }
-      } else {
-           dialogueBox.style.display = 'none';
+      var nearbyStatue = getNearbyStatue(x, y);
+      if (nearbyStatue && interact && !previousInteract) {
+         dialogueBox.innerHTML = nearbyStatue.text || "";
+         dialogueBox.style.display = 'block';
+      } else if (!nearbyStatue) {
+         dialogueBox.style.display = 'none';
       }
    }
       previousInteract = interact;
@@ -134,7 +186,7 @@ document.addEventListener("keydown", (e) => {
    var dir = keys[e.which];
 
    // Exit area interaction (top of the map)
-   if (e.key == ' ' && x > 70 && x < 130 && y > 80) {
+   if (e.key == ' ' && x > 70 && x < 130 && y < 100) {
     window.location.href = '/index.html'
    }
 

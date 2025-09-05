@@ -55,7 +55,7 @@ body {
 
 .map {
    image-rendering: pixelated;
-   background-image: url('../assets/pixelB.jpg'); 
+   background-image: url('../assets/pixelB.png'); 
    background-size: 100%;
    width: calc(13 * var(--grid-cell));
    height: calc(34 * var(--grid-cell));
