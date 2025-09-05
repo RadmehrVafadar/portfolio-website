@@ -35,7 +35,7 @@ var STATUE_DEFAULT_INTERACT_PADDING = 10;
 
 var statues = [
    // Example statue. Duplicate and edit for more statues.
-   { id: "Mirror", rect: { x1: 0, y1: 110, x2: 30, y2: 160 }, text: "this is going to be an explanation of a statue", interactPadding: 10 },
+   { id: "Mirror", rect: { x1: 0, y1: 110, x2: 30, y2: 160 }, text: "Hey a mirror! Maybe I can see what I look like in it.", interactPadding: 10 },
 ];
 
 function pointInRect(px, py, rect) {
@@ -135,7 +135,7 @@ const placeCharacter = () => {
    
    // Show welcome message automatically at spawn, hide when player moves
    if (!hasPlayerMoved) {
-      dialogueBox.innerHTML = "Welcome to my portfolio showcase game! Navigate with the arrow keys. Press Spacebar to interact with statues. To exit, go to the door and press Space.";
+      dialogueBox.innerHTML = "Welcome to my portfolio showcase game! Navigate with the arrow keys. Press Spacebar or E to interact. To exit, interact with the door.";
       dialogueBox.style.display = 'block';
    } else {
       // Handle other interactions after player has moved
@@ -186,7 +186,7 @@ document.addEventListener("keydown", (e) => {
    var dir = keys[e.which];
 
    // Exit area interaction (top of the map)
-   if (e.key == ' ' && x > 70 && x < 130 && y < 100) {
+   if ((e.key === ' ' || (typeof e.key === 'string' && e.key.toLowerCase() === 'e')) && x > 70 && x < 130 && y < 100) {
     window.location.href = '/index.html'
    }
 
@@ -194,7 +194,7 @@ document.addEventListener("keydown", (e) => {
       held_directions.unshift(dir)
    }
 
-   if (e.key == ' ') { interact = true }
+   if (e.key === ' ' || (typeof e.key === 'string' && e.key.toLowerCase() === 'e')) { interact = true }
 })
 
 document.addEventListener("keyup", (e) => {
@@ -204,7 +204,7 @@ document.addEventListener("keyup", (e) => {
       held_directions.splice(index, 1)
    }
 
-   if (e.key == ' ') { interact = false }
+   if (e.key === ' ' || (typeof e.key === 'string' && e.key.toLowerCase() === 'e')) { interact = false }
 });
 
 
