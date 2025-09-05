@@ -43,7 +43,7 @@
   align-items: center;     /* vertical center */
   border-radius: 50%;
   background-color: rgb(252,189,70,1);
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.2); /* semi-transparent white text */
   border-radius: 50%; 
   transition:
   background-color 0.5s ease-in-out, 
@@ -52,7 +52,6 @@
 
 .moon {
   background-color: rgb(78, 78, 77);
-  color: rgba(255, 255, 255, 0.6); /* semi-transparent white text */
   left: calc(100% - 150px)
 
 }
