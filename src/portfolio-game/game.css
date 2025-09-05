@@ -69,22 +69,12 @@ body {
    overflow:hidden;
 }
 
-.shadow {
-   width: calc( var(--grid-cell)* 2 );
-   height: calc( var(--grid-cell)* 2 );
-   position: absolute;
-   left:0;
-   top:0;
-   background: url("https://assets.codepen.io/21542/DemoRpgCharacterShadow.png") no-repeat no-repeat;
-   background-size: 100%;
-}
-
 .character_spritesheet {
    position: absolute;
-   background: url("https://assets.codepen.io/21542/DemoRpgCharacter.png") no-repeat no-repeat;
+   background: url('../assets/walk.png') no-repeat no-repeat;
    background-size: 100%;
-   width: calc( var(--grid-cell)* 8 );
-   height: calc( var(--grid-cell)* 8 );
+   width: calc( var(--grid-cell)* 18 );
+   height: calc( var(--grid-cell)* 2 );
 }
 
 .character[facing="right"] .character_spritesheet {
@@ -97,7 +87,7 @@ body {
    background-position-y: calc( var(--pixel-size) * -96 );
 }
 .character[walking="true"] .character_spritesheet {
-   animation: walkAnimation 0.6s steps(4) infinite; 
+   animation: walkAnimation 0.5s steps(4) infinite; 
 }
 
 @keyframes walkAnimation {
@@ -105,7 +95,7 @@ body {
     transform: translate3d(0%,0%,0);
   }
   to {
-    transform: translate3d(-100%,0%,0);
+    transform: translate3d(-89%,0%,0);
   }
 }
 
