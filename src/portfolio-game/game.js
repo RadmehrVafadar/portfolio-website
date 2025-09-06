@@ -68,14 +68,14 @@ var statues = [
    { 
       id: "Distributed-Video-Player", 
       rect: { x1: 0, y1: 512, x2: 54, y2: 572}, 
-      text: "A magical orb that visualises my favourite songs.", 
+      text: "A distributed video player that can play videos from multiple sources.", 
       url: 'https://github.com/RadmehrVafadar/Distributed-Video-Streaming',
       interactPadding: 10 },
    
    { 
       id: "MineSweeper", 
       rect: { x1: 204, y1: 522, x2: 160, y2: 556}, 
-      text: "A magical orb that visualises my favourite songs.", 
+      text: "A recreation of the classic game Minesweeper from scratch in python using pygame.", 
       url: 'https://github.com/RadmehrVafadar/mine-sweeper',
       interactPadding: 10 },
    
