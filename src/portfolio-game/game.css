@@ -199,3 +199,15 @@ body {
    line-height: 1.5em;
    display: none;
 }
+
+.actionPrompt {
+   position:absolute;
+   right: calc(var(--pixel-size) * 2);
+   top: calc(var(--pixel-size) * 2);
+   padding: 6px 10px;
+   background: rgba(0,0,0,0.7);
+   color: #fff;
+   border-radius: 8px;
+   font-size: 12px;
+   display: none;
+}

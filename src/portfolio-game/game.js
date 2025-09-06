@@ -11,8 +11,8 @@ function getCurrentPixelSize() {
 }
 
 //start in the middle of the map
-var x = 90;
-var y = 94;
+var x = 100;
+var y = 120;
 var held_directions = []; //State of which arrow keys we are holding down
 var speed = 2; //How fast the character moves in pixels per frame
 
@@ -23,6 +23,7 @@ var initialPixelSize = getCurrentPixelSize();
 var hasPlayerMoved = false;
 var initialX = x;
 var initialY = y;
+var openedLinkThisPress = false;
 
 
 
@@ -35,7 +36,12 @@ var STATUE_DEFAULT_INTERACT_PADDING = 10;
 
 var statues = [
    // Example statue. Duplicate and edit for more statues.
-   { id: "Mirror", rect: { x1: 0, y1: 110, x2: 30, y2: 160 }, text: "Hey a mirror! Maybe I can see what I look like in it.", interactPadding: 10 },
+   { 
+      id: "Mirror", 
+      rect: { x1: 0, y1: 110, x2: 30, y2: 160 }, 
+      text: "Hey a mirror! Maybe I can see what I look like in it.", 
+      url: 'https://www.linkedin.com/in/radmehr-vafadar-3b89391a1/',
+      interactPadding: 10 },
 ];
 
 function pointInRect(px, py, rect) {
@@ -132,11 +138,13 @@ const placeCharacter = () => {
    }
    
    var dialogueBox = document.querySelector('.dialogueBox');
+   var actionPrompt = document.querySelector('.actionPrompt');
    
    // Show welcome message automatically at spawn, hide when player moves
    if (!hasPlayerMoved) {
       dialogueBox.innerHTML = "Welcome to my portfolio showcase game! Navigate with the arrow keys. Press Spacebar or E to interact. To exit, interact with the door.";
       dialogueBox.style.display = 'block';
+      if (actionPrompt) { actionPrompt.style.display = 'none'; }
    } else {
       // Handle other interactions after player has moved
       var nearbyStatue = getNearbyStatue(x, y);
@@ -145,6 +153,27 @@ const placeCharacter = () => {
          dialogueBox.style.display = 'block';
       } else if (!nearbyStatue) {
          dialogueBox.style.display = 'none';
+      }
+
+      // Action prompt guidance
+      if (actionPrompt) {
+         var promptShown = false;
+         if (nearbyStatue) {
+            var msg = 'Press Space to read';
+            if (nearbyStatue.url) { msg += ' or Press E to open'; }
+            actionPrompt.textContent = msg;
+            actionPrompt.style.display = 'block';
+            promptShown = true;
+         }
+         // Exit area prompt
+         if (!promptShown && x > 70 && x < 130 && y < 100) {
+            actionPrompt.textContent = 'Press Space or E to exit';
+            actionPrompt.style.display = 'block';
+            promptShown = true;
+         }
+         if (!promptShown) {
+            actionPrompt.style.display = 'none';
+         }
       }
    }
       previousInteract = interact;
@@ -190,6 +219,15 @@ document.addEventListener("keydown", (e) => {
     window.location.href = '/index.html'
    }
 
+   // If pressing 'e' near a statue with a URL, open it
+   if (typeof e.key === 'string' && e.key.toLowerCase() === 'e') {
+      var nearbyForOpen = getNearbyStatue(x, y);
+      if (nearbyForOpen && nearbyForOpen.url && !openedLinkThisPress) {
+         window.open(nearbyForOpen.url, '_blank', 'noopener');
+         openedLinkThisPress = true;
+      }
+   }
+
    if (dir && held_directions.indexOf(dir) === -1) {
       held_directions.unshift(dir)
    }
@@ -205,6 +243,7 @@ document.addEventListener("keyup", (e) => {
    }
 
    if (e.key === ' ' || (typeof e.key === 'string' && e.key.toLowerCase() === 'e')) { interact = false }
+   if (typeof e.key === 'string' && e.key.toLowerCase() === 'e') { openedLinkThisPress = false }
 });
 
 
