@@ -42,19 +42,59 @@ var statues = [
       text: "Hey a mirror! Maybe I can see what I look like in it.", 
       url: 'https://www.linkedin.com/in/radmehr-vafadar-3b89391a1/',
       interactPadding: 10 },
+
+   { 
+      id: "Boids-Algorithm", 
+      rect: { x1: 204, y1: 108, x2: 154, y2: 154 }, 
+      text: "A bird simulation? Maybe I can learn something from it.", 
+      url: 'https://radmehrvafadar.github.io/Boids-algorithm-demo/',
+      interactPadding: 10 },
+
+
+   { 
+      id: "Fake News", 
+      rect: { x1: 0, y1: 320, x2: 40, y2: 362}, 
+      text: "An AI fake news detector? I wonder how it works.", 
+      url: 'https://github.com/RadmehrVafadar/AI-fake-news-detector',
+      interactPadding: 10 },
+
+   { 
+      id: "Music Ord", 
+      rect: { x1: 204, y1: 320, x2: 158, y2: 368}, 
+      text: "A magical orb that visualises my favourite songs.", 
+      url: 'https://github.com/RadmehrVafadar/voiceEmotionVisualizer',
+      interactPadding: 10 },
+
+   { 
+      id: "Distributed-Video-Player", 
+      rect: { x1: 0, y1: 512, x2: 54, y2: 572}, 
+      text: "A magical orb that visualises my favourite songs.", 
+      url: 'https://github.com/RadmehrVafadar/Distributed-Video-Streaming',
+      interactPadding: 10 },
+   
+   { 
+      id: "MineSweeper", 
+      rect: { x1: 204, y1: 522, x2: 160, y2: 556}, 
+      text: "A magical orb that visualises my favourite songs.", 
+      url: 'https://github.com/RadmehrVafadar/mine-sweeper',
+      interactPadding: 10 },
+   
 ];
 
 function pointInRect(px, py, rect) {
-   return px >= rect.x1 && px <= rect.x2 && py >= rect.y1 && py <= rect.y2;
+   var xMin = Math.min(rect.x1, rect.x2);
+   var xMax = Math.max(rect.x1, rect.x2);
+   var yMin = Math.min(rect.y1, rect.y2);
+   var yMax = Math.max(rect.y1, rect.y2);
+   return px >= xMin && px <= xMax && py >= yMin && py <= yMax;
 }
 
 function inflateRect(rect, padding) {
-   return {
-      x1: rect.x1 - padding,
-      y1: rect.y1 - padding,
-      x2: rect.x2 + padding,
-      y2: rect.y2 + padding,
-   };
+   var xMin = Math.min(rect.x1, rect.x2) - padding;
+   var xMax = Math.max(rect.x1, rect.x2) + padding;
+   var yMin = Math.min(rect.y1, rect.y2) - padding;
+   var yMax = Math.max(rect.y1, rect.y2) + padding;
+   return { x1: xMin, y1: yMin, x2: xMax, y2: yMax };
 }
 
 function isCollidingWithAnyStatue(nextX, nextY) {
@@ -130,10 +170,9 @@ const placeCharacter = () => {
 
 
 
-   //Standing points (gives placement to text pop ups)
-   //Now using grid-based coordinates that scale properly
-   
-   if (interact) {
+   // Tool used to find coordinates of player
+   // to use remove '&& false' and press spacebar
+   if (interact && false) {
       console.log([x,y])
    }
    
