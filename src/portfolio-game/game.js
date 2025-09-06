@@ -11,17 +11,113 @@ function getCurrentPixelSize() {
 }
 
 //start in the middle of the map
-var x = 90;
-var y = 94;
+var x = 100;
+var y = 120;
 var held_directions = []; //State of which arrow keys we are holding down
 var speed = 2; //How fast the character moves in pixels per frame
 
 // Store initial pixel size to maintain coordinate consistency
 var initialPixelSize = getCurrentPixelSize();
 
+// Track if player has moved from spawn position
+var hasPlayerMoved = false;
+var initialX = x;
+var initialY = y;
+var openedLinkThisPress = false;
 
 
 
+
+
+// Statue system configuration
+// Each statue defines a collision rectangle (player cannot enter)
+// and an optional interaction padding to allow interacting slightly around it.
+var STATUE_DEFAULT_INTERACT_PADDING = 10;
+
+var statues = [
+   // Example statue. Duplicate and edit for more statues.
+   { 
+      id: "Mirror", 
+      rect: { x1: 0, y1: 110, x2: 30, y2: 160 }, 
+      text: "Hey a mirror! Maybe I can see what I look like in it.", 
+      url: 'https://www.linkedin.com/in/radmehr-vafadar-3b89391a1/',
+      interactPadding: 10 },
+
+   { 
+      id: "Boids-Algorithm", 
+      rect: { x1: 204, y1: 108, x2: 154, y2: 154 }, 
+      text: "A bird simulation? Maybe I can learn something from it.", 
+      url: 'https://radmehrvafadar.github.io/Boids-algorithm-demo/',
+      interactPadding: 10 },
+
+
+   { 
+      id: "Fake News", 
+      rect: { x1: 0, y1: 320, x2: 40, y2: 362}, 
+      text: "An AI fake news detector? I wonder how it works.", 
+      url: 'https://github.com/RadmehrVafadar/AI-fake-news-detector',
+      interactPadding: 10 },
+
+   { 
+      id: "Music Ord", 
+      rect: { x1: 204, y1: 320, x2: 158, y2: 368}, 
+      text: "A magical orb that visualises my favourite songs.", 
+      url: 'https://github.com/RadmehrVafadar/voiceEmotionVisualizer',
+      interactPadding: 10 },
+
+   { 
+      id: "Distributed-Video-Player", 
+      rect: { x1: 0, y1: 512, x2: 54, y2: 572}, 
+      text: "A distributed video player that can play videos from multiple sources.", 
+      url: 'https://github.com/RadmehrVafadar/Distributed-Video-Streaming',
+      interactPadding: 10 },
+   
+   { 
+      id: "MineSweeper", 
+      rect: { x1: 204, y1: 522, x2: 160, y2: 556}, 
+      text: "A recreation of the classic game Minesweeper from scratch in python using pygame.", 
+      url: 'https://github.com/RadmehrVafadar/mine-sweeper',
+      interactPadding: 10 },
+   
+];
+
+function pointInRect(px, py, rect) {
+   var xMin = Math.min(rect.x1, rect.x2);
+   var xMax = Math.max(rect.x1, rect.x2);
+   var yMin = Math.min(rect.y1, rect.y2);
+   var yMax = Math.max(rect.y1, rect.y2);
+   return px >= xMin && px <= xMax && py >= yMin && py <= yMax;
+}
+
+function inflateRect(rect, padding) {
+   var xMin = Math.min(rect.x1, rect.x2) - padding;
+   var xMax = Math.max(rect.x1, rect.x2) + padding;
+   var yMin = Math.min(rect.y1, rect.y2) - padding;
+   var yMax = Math.max(rect.y1, rect.y2) + padding;
+   return { x1: xMin, y1: yMin, x2: xMax, y2: yMax };
+}
+
+function isCollidingWithAnyStatue(nextX, nextY) {
+   for (var i = 0; i < statues.length; i++) {
+      var s = statues[i];
+      if (pointInRect(nextX, nextY, s.rect)) {
+         return true;
+      }
+   }
+   return false;
+}
+
+function getNearbyStatue(px, py) {
+   for (var i = 0; i < statues.length; i++) {
+      var s = statues[i];
+      var padding = (typeof s.interactPadding === 'number') ? s.interactPadding : STATUE_DEFAULT_INTERACT_PADDING;
+      var interactRect = inflateRect(s.rect, padding);
+      if (pointInRect(px, py, interactRect)) {
+         return s;
+      }
+   }
+   return null;
+}
 
 const placeCharacter = () => {
    
@@ -29,20 +125,44 @@ const placeCharacter = () => {
    
    const held_direction = held_directions[0];
    if (held_direction) {
-      if (held_direction === directions.left) {x += speed;}
-      if (held_direction === directions.right) {x -= speed;}
-      if (held_direction === directions.up) {y += speed;}
-      if (held_direction === directions.down) {y -= speed;}
+      var dx = 0;
+      var dy = 0;
+      if (held_direction === directions.left) { dx += speed; }
+      if (held_direction === directions.right) { dx -= speed; }
+      if (held_direction === directions.up) { dy += speed; }
+      if (held_direction === directions.down) { dy -= speed; }
+
+      // Attempt horizontal move if not colliding with any statue
+      if (dx !== 0) {
+         var nextX = x + dx;
+         if (!isCollidingWithAnyStatue(nextX, y)) {
+            x = nextX;
+         }
+      }
+
+      // Attempt vertical move if not colliding with any statue
+      if (dy !== 0) {
+         var nextY = y + dy;
+         if (!isCollidingWithAnyStatue(x, nextY)) {
+            y = nextY;
+         }
+      }
+
       character.setAttribute("facing", held_direction);
+
+      // Check if player has moved from initial position
+      if (!hasPlayerMoved && (x !== initialX || y !== initialY)) {
+         hasPlayerMoved = true;
+      }
    }
    character.setAttribute("walking", held_direction ? "true" : "false");
 
 
    //Limits (gives the illusion of walls) - now scale with pixel size
-   var leftLimit = -7;
-   var rightLimit = (16 * 11) + 7;
-   var topLimit = 80;
-   var bottomLimit = (16 * 31.5);
+   var leftLimit = 0;
+   var rightLimit = (16 * 12) + 12;
+   var topLimit = 90;
+   var bottomLimit = (16 * 36.7);
    if (x < leftLimit) { x = leftLimit; }
    if (x > rightLimit) { x = rightLimit; }
    if (y < topLimit) { y = topLimit; }
@@ -50,44 +170,50 @@ const placeCharacter = () => {
 
 
 
-   //Standing points (gives placement to text pop ups)
-   //Now using grid-based coordinates that scale properly
-   
-   if (interact) {
+   // Tool used to find coordinates of player
+   // to use remove '&& false' and press spacebar
+   if (interact && false) {
       console.log([x,y])
    }
    
-   // Interaction points now scale with the grid system (16px per grid cell)
-   // Welcome message interaction area (approximately 5-6 grid cells from start, 6-7.5 cells down)
-   var welcomeAreaLeft = 80;
-   var welcomeAreaRight = 100;
-   var welcomeAreaTop = 100;
-   var welcomeAreaBottom = 120;
+   var dialogueBox = document.querySelector('.dialogueBox');
+   var actionPrompt = document.querySelector('.actionPrompt');
    
-   // Statue interaction area (approximately 1.75-2.875 grid cells from left, 17.375-18.75 cells down)  
-   var statueAreaLeft = 28;
-   var statueAreaRight = 46;
-   var statueAreaTop = 278;
-   var statueAreaBottom = 300;
-   
-   if (x > welcomeAreaLeft && x < welcomeAreaRight && y > welcomeAreaTop && y < welcomeAreaBottom) {
-      if (interact && !previousInteract) {
-            var dialogueBox = document.querySelector('.dialogueBox');
-            dialogueBox.textContent = "";
-            var text = document.createTextNode("Hello and welcome to my game...");
-            dialogueBox.appendChild(text);
-            dialogueBox.style.display = 'block';
-      }
-   } else if (x > statueAreaLeft && x < statueAreaRight && y > statueAreaTop && y < statueAreaBottom) {
-      if (interact && !previousInteract) {
-            var dialogueBox = document.querySelector('.dialogueBox');
-            dialogueBox.textContent = "";
-            var text = document.createTextNode("this is going to be an explanation of a statue");
-            dialogueBox.appendChild(text);
-            dialogueBox.style.display = 'block';
-      }
+   // Show welcome message automatically at spawn, hide when player moves
+   if (!hasPlayerMoved) {
+      dialogueBox.innerHTML = "Welcome to my portfolio showcase game! Navigate with the arrow keys. Press Spacebar or E to interact. To exit, interact with the door.";
+      dialogueBox.style.display = 'block';
+      if (actionPrompt) { actionPrompt.style.display = 'none'; }
    } else {
-        document.querySelector('.dialogueBox').style.display = 'none';
+      // Handle other interactions after player has moved
+      var nearbyStatue = getNearbyStatue(x, y);
+      if (nearbyStatue && interact && !previousInteract) {
+         dialogueBox.innerHTML = nearbyStatue.text || "";
+         dialogueBox.style.display = 'block';
+      } else if (!nearbyStatue) {
+         dialogueBox.style.display = 'none';
+      }
+
+      // Action prompt guidance
+      if (actionPrompt) {
+         var promptShown = false;
+         if (nearbyStatue) {
+            var msg = 'Press Space to read';
+            if (nearbyStatue.url) { msg += ' or Press E to open'; }
+            actionPrompt.textContent = msg;
+            actionPrompt.style.display = 'block';
+            promptShown = true;
+         }
+         // Exit area prompt
+         if (!promptShown && x > 70 && x < 130 && y < 100) {
+            actionPrompt.textContent = 'Press Space or E to exit';
+            actionPrompt.style.display = 'block';
+            promptShown = true;
+         }
+         if (!promptShown) {
+            actionPrompt.style.display = 'none';
+         }
+      }
    }
       previousInteract = interact;
 
@@ -128,15 +254,24 @@ document.addEventListener("keydown", (e) => {
    var dir = keys[e.which];
 
    // Exit area interaction (top of the map)
-   if (e.key == 'e' && x > 70 && x < 130 && y == 80) {
+   if ((e.key === ' ' || (typeof e.key === 'string' && e.key.toLowerCase() === 'e')) && x > 70 && x < 130 && y < 100) {
     window.location.href = '/index.html'
+   }
+
+   // If pressing 'e' near a statue with a URL, open it
+   if (typeof e.key === 'string' && e.key.toLowerCase() === 'e') {
+      var nearbyForOpen = getNearbyStatue(x, y);
+      if (nearbyForOpen && nearbyForOpen.url && !openedLinkThisPress) {
+         window.open(nearbyForOpen.url, '_blank', 'noopener');
+         openedLinkThisPress = true;
+      }
    }
 
    if (dir && held_directions.indexOf(dir) === -1) {
       held_directions.unshift(dir)
    }
 
-   if (e.key == ' ') { interact = true }
+   if (e.key === ' ' || (typeof e.key === 'string' && e.key.toLowerCase() === 'e')) { interact = true }
 })
 
 document.addEventListener("keyup", (e) => {
@@ -146,7 +281,8 @@ document.addEventListener("keyup", (e) => {
       held_directions.splice(index, 1)
    }
 
-   if (e.key == ' ') { interact = false }
+   if (e.key === ' ' || (typeof e.key === 'string' && e.key.toLowerCase() === 'e')) { interact = false }
+   if (typeof e.key === 'string' && e.key.toLowerCase() === 'e') { openedLinkThisPress = false }
 });
 
 
