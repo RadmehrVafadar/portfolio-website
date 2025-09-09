@@ -198,6 +198,7 @@ body {
    padding: 1em;
    line-height: 1.5em;
    display: none;
+   z-index: 4;
 }
 
 .actionPrompt {
@@ -210,4 +211,30 @@ body {
    border-radius: 8px;
    font-size: 12px;
    display: none;
+}
+
+/* Mobile action buttons */
+.action-buttons {
+   position: absolute;
+   left: calc(var(--pixel-size) * 2);
+   bottom: calc(var(--pixel-size) * 2);
+   display: flex;
+   gap: calc(var(--pixel-size) * 2);
+   z-index: 3;
+   display: none;
+}
+.action-button {
+   appearance: none;
+   border: 0;
+   padding: 8px 12px;
+   border-radius: 10px;
+   background: rgba(0,0,0,0.75);
+   color: #fff;
+   font-size: 12px;
+}
+
+/* Show mobile actions and move dialogue above controls on touch devices */
+@media (pointer: coarse), (hover: none) {
+  .action-buttons { display: flex; }
+  .dialogueBox { bottom: calc(var(--pixel-size) * 42); }
 }

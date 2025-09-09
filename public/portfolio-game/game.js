@@ -28,7 +28,7 @@ var openedLinkThisPress = false;
 
 
 
-
+// (Mobile detection removed to keep dialogue, including intro, on all devices)
 // Statue system configuration
 // Each statue defines a collision rectangle (player cannot enter)
 // and an optional interaction padding to allow interacting slightly around it.
@@ -317,20 +317,26 @@ const handleDpadPress = (direction, click) => {
 
 
 //Bind a ton of events for the dpad
-document.querySelector(".dpad-left").addEventListener("touchstart", (e) => handleDpadPress(directions.left, true));
-document.querySelector(".dpad-up").addEventListener("touchstart", (e) => handleDpadPress(directions.up, true));
-document.querySelector(".dpad-right").addEventListener("touchstart", (e) => handleDpadPress(directions.right, true));
-document.querySelector(".dpad-down").addEventListener("touchstart", (e) => handleDpadPress(directions.down, true));
+// Remap D-pad to mirror arrow key mapping
+// Arrow keys mapping:
+//  Left Arrow -> directions.right
+//  Right Arrow -> directions.left
+//  Up Arrow -> directions.down
+//  Down Arrow -> directions.up
+document.querySelector(".dpad-left").addEventListener("touchstart", (e) => handleDpadPress(directions.right, true));
+document.querySelector(".dpad-up").addEventListener("touchstart", (e) => handleDpadPress(directions.down, true));
+document.querySelector(".dpad-right").addEventListener("touchstart", (e) => handleDpadPress(directions.left, true));
+document.querySelector(".dpad-down").addEventListener("touchstart", (e) => handleDpadPress(directions.up, true));
 
-document.querySelector(".dpad-left").addEventListener("mousedown", (e) => handleDpadPress(directions.left, true));
-document.querySelector(".dpad-up").addEventListener("mousedown", (e) => handleDpadPress(directions.up, true));
-document.querySelector(".dpad-right").addEventListener("mousedown", (e) => handleDpadPress(directions.right, true));
-document.querySelector(".dpad-down").addEventListener("mousedown", (e) => handleDpadPress(directions.down, true));
+document.querySelector(".dpad-left").addEventListener("mousedown", (e) => handleDpadPress(directions.right, true));
+document.querySelector(".dpad-up").addEventListener("mousedown", (e) => handleDpadPress(directions.down, true));
+document.querySelector(".dpad-right").addEventListener("mousedown", (e) => handleDpadPress(directions.left, true));
+document.querySelector(".dpad-down").addEventListener("mousedown", (e) => handleDpadPress(directions.up, true));
 
-document.querySelector(".dpad-left").addEventListener("mouseover", (e) => handleDpadPress(directions.left));
-document.querySelector(".dpad-up").addEventListener("mouseover", (e) => handleDpadPress(directions.up));
-document.querySelector(".dpad-right").addEventListener("mouseover", (e) => handleDpadPress(directions.right));
-document.querySelector(".dpad-down").addEventListener("mouseover", (e) => handleDpadPress(directions.down));
+document.querySelector(".dpad-left").addEventListener("mouseover", (e) => handleDpadPress(directions.right));
+document.querySelector(".dpad-up").addEventListener("mouseover", (e) => handleDpadPress(directions.down));
+document.querySelector(".dpad-right").addEventListener("mouseover", (e) => handleDpadPress(directions.left));
+document.querySelector(".dpad-down").addEventListener("mouseover", (e) => handleDpadPress(directions.up));
 
 // Handle window resize to maintain proper scaling
 window.addEventListener('resize', () => {
@@ -339,3 +345,57 @@ window.addEventListener('resize', () => {
       placeCharacter();
    });
 });
+
+// Mobile action buttons (Space and E equivalents)
+var btnSpace = document.querySelector('.btn-space');
+var btnE = document.querySelector('.btn-e');
+
+function handleSpaceDown(e) {
+   if (e && typeof e.preventDefault === 'function') e.preventDefault();
+   // Exit if at door
+   if (x > 70 && x < 130 && y < 100) {
+      window.location.href = '/index.html';
+      return;
+   }
+   interact = true;
+}
+function handleSpaceUp(e) {
+   if (e && typeof e.preventDefault === 'function') e.preventDefault();
+   interact = false;
+}
+
+function handleEDown(e) {
+   if (e && typeof e.preventDefault === 'function') e.preventDefault();
+   // Exit if at door
+   if (x > 70 && x < 130 && y < 100) {
+      window.location.href = '/index.html';
+      return;
+   }
+   // Open statue link if available
+   var nearbyForOpen = getNearbyStatue(x, y);
+   if (nearbyForOpen && nearbyForOpen.url && !openedLinkThisPress) {
+      window.open(nearbyForOpen.url, '_blank', 'noopener');
+      openedLinkThisPress = true;
+   }
+   interact = true;
+}
+function handleEUp(e) {
+   if (e && typeof e.preventDefault === 'function') e.preventDefault();
+   interact = false;
+   openedLinkThisPress = false;
+}
+
+if (btnSpace) {
+   btnSpace.addEventListener('touchstart', handleSpaceDown);
+   btnSpace.addEventListener('mousedown', handleSpaceDown);
+   btnSpace.addEventListener('touchend', handleSpaceUp);
+   btnSpace.addEventListener('mouseup', handleSpaceUp);
+   btnSpace.addEventListener('mouseleave', handleSpaceUp);
+}
+if (btnE) {
+   btnE.addEventListener('touchstart', handleEDown);
+   btnE.addEventListener('mousedown', handleEDown);
+   btnE.addEventListener('touchend', handleEUp);
+   btnE.addEventListener('mouseup', handleEUp);
+   btnE.addEventListener('mouseleave', handleEUp);
+}
