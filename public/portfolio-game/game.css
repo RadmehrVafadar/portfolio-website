@@ -248,7 +248,7 @@ body {
    z-index: 2;
 }
 
-.room-exit {
+.room-door {
    z-index: 1;
    background:
       linear-gradient(90deg, transparent 0 18%, rgba(32,22,13,0.65) 18% 82%, transparent 82%),
@@ -705,4 +705,64 @@ body {
       linear-gradient(#b24a3b, #5a2430);
    border: calc(var(--pixel-size) * 1) solid #2a151a;
    box-shadow: 0 0 calc(var(--pixel-size) * 6) rgba(248,211,93,0.7);
+}
+
+/* Repaired fixed-room arcade visuals */
+.map.room-lobby,
+.map.room-projects,
+.map.room-lab,
+.map.room-skills,
+.map.room-archive,
+.map.room-exit {
+   background-image:
+      linear-gradient(90deg, rgba(255,255,255,0.11) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(0,0,0,0.18) 1px, transparent 1px),
+      radial-gradient(circle at 50% 56%, rgba(255,255,255,0.12), transparent 45%);
+   background-size:
+      calc(var(--pixel-size) * 16) calc(var(--pixel-size) * 16),
+      calc(var(--pixel-size) * 16) calc(var(--pixel-size) * 16),
+      100% 100%;
+}
+
+.map.room-lobby { background-color: #5e4a64; }
+.map.room-projects { background-color: #465646; }
+.map.room-lab { background-color: #3d4374; }
+.map.room-skills { background-color: #31526f; }
+.map.room-archive { background-color: #5a4251; }
+.map.room-exit { background-color: #464957; }
+
+.room-prop {
+   overflow: hidden;
+   border: calc(var(--pixel-size)) solid #20151a;
+   box-shadow:
+      inset 0 calc(var(--pixel-size)) 0 rgba(255,255,255,0.22),
+      inset 0 calc(var(--pixel-size) * -1) 0 rgba(0,0,0,0.28);
+}
+
+.room-door {
+   background:
+      linear-gradient(#f8d35d, #f8d35d) center top / 70% 18% no-repeat,
+      linear-gradient(90deg, #201622 0 18%, #8a5633 18% 82%, #201622 82% 100%);
+   border-color: #20151a;
+   box-shadow:
+      0 0 calc(var(--pixel-size) * 4) rgba(248,211,93,0.7),
+      inset 0 calc(var(--pixel-size)) 0 rgba(255,255,255,0.18);
+}
+
+.room-blocker,
+.room-interactable {
+   z-index: 2;
+}
+
+.room-title {
+   left: calc(var(--pixel-size) * 36);
+   top: calc(var(--pixel-size) * 36);
+}
+
+.dialogueBox,
+.actionPrompt,
+.roomName,
+.dpad,
+.action-buttons {
+   z-index: 10;
 }
