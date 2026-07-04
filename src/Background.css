@@ -5,6 +5,7 @@
 
 .app-container {
   position: fixed; 
+  z-index: 0;
   top: 0; 
   right: 0; 
   bottom: 0; 
@@ -64,6 +65,7 @@
 
 .clouds {
   position: absolute;
+  pointer-events: none;
   background-image: url('./assets/clouds.png');
   animation: animateBG 25s linear infinite;
   background-size: 1000px;

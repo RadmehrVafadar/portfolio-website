@@ -5,6 +5,7 @@
 
 .container {
     position: fixed;
+    z-index: 10;
     margin: auto; 
     top: 0; 
     right: 0; 
@@ -19,6 +20,7 @@
 }
 
 .button {
+    display: inline-block;
     margin-left: 1.3em;
     border-radius: 9px;
     font-family: 'Arcade Interlaced', cursive; 
