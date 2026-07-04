@@ -25,7 +25,7 @@ No automated unit test framework is configured. For UI changes, run `npm run dev
 
 ## Commit & Pull Request Guidelines
 
-Work on the `codex` branch for repository changes, and open pull requests from that branch. Commit every completed change before moving on. Use clear, well-summarized messages, such as `Document contributor workflow for Codex changes`. Pull requests should include a short description, verification steps, and screenshots or screen recordings for visible UI changes. Link related issues when applicable and call out changes to static assets such as `public/resume.pdf` or game files.
+Work on the `codex` branch for repository changes, and open pull requests from that branch. Commit every completed change before moving on. Author agent-created commits as Codex, for example with `git -c user.name="Codex" -c user.email="codex@openai.com" commit ...`. Use clear, well-summarized messages, such as `Document contributor workflow for Codex changes`. Pull requests should include a short description, verification steps, and screenshots or screen recordings for visible UI changes. Link related issues when applicable and call out changes to static assets such as `public/resume.pdf` or game files.
 
 ## Agent-Specific Instructions
 
