@@ -168,14 +168,6 @@ const placeCharacter = () => {
    if (y < topLimit) { y = topLimit; }
    if (y > bottomLimit) { y = bottomLimit; }
 
-
-
-   // Tool used to find coordinates of player
-   // to use remove '&& false' and press spacebar
-   if (interact && false) {
-      console.log([x,y])
-   }
-   
    var dialogueBox = document.querySelector('.dialogueBox');
    var actionPrompt = document.querySelector('.actionPrompt');
    
